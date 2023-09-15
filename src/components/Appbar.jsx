@@ -12,7 +12,7 @@ const Appbar = () => {
   const [openDrawer, setOpenDrawer] = useState(false);
   return (
     <>
-      <AppBar position="static">
+      <AppBar position="fixed">
         <Toolbar>
           <IconButton size="large">
             <MenuOpenIcon
