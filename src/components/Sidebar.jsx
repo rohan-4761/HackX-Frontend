@@ -11,18 +11,19 @@ import Button from "@mui/material/Button";
 import LogoutIcon from "@mui/icons-material/Logout";
 import EditIcon from "@mui/icons-material/Edit";
 import { blue } from "@mui/material/colors";
-import {useLocation, useNavigate} from "react-router-dom"
+import { useLocation, useNavigate } from "react-router-dom";
 
 const Sidebar = ({ open, setOpen }) => {
   const navigate = useNavigate();
-  const location = useLocation()
+  const location = useLocation();
   const menuItems = [
     {
       text: "Dashboard",
-      path: "/dashboard"
+      path: "/dashboard",
     },
     {
-      text: "Function 2",
+      text: "Request Items",
+      path: "/requestItems",
     },
     {
       text: "Function 3",
@@ -37,11 +38,9 @@ const Sidebar = ({ open, setOpen }) => {
       onClose={(e) => setOpen(false)}
       anchor="left"
       open={open}
-      sx={{ paddingLeft: 4, width: 270 }}
+      sx={{ paddingLeft: 4 }}
       PaperProps={{
-        style: {
-          width: "370px",
-        },
+        style: { width: "370px" },
       }}
     >
       <AccountCircleIcon
@@ -51,19 +50,29 @@ const Sidebar = ({ open, setOpen }) => {
         Account Name
       </Typography>
 
-      <Button variant="text" startIcon={<EditIcon fontSize="small" />}>
+      <Button
+        variant="text"
+        startIcon={<EditIcon fontSize="small" />}
+        onClick={() => navigate("/edit")}
+      >
         Edit Profile
       </Button>
 
       <Divider />
       <List>
         {menuItems.map((item) => (
-          <ListItemButton key={item.text} onClick={()=> navigate(item.path)}>
-            <ListItemText primary={item.text} sx={{
-              color: location.pathname === item.path ? blue[700] : "text.primary"
-            }}/>
+          <ListItemButton key={item.text} onClick={() => navigate(item.path)}>
+            <ListItemText
+              primary={item.text}
+              sx={{
+                color:
+                  location.pathname === item.path ? blue[700] : "text.primary",
+              }}
+            />
           </ListItemButton>
         ))}
+
+        <Divider />
         <Button
           variant="text"
           color="error"

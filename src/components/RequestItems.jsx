@@ -27,6 +27,7 @@ import { blue } from "@mui/material/colors";
 export default function RequestItems() {
   const [itemName, setItemName] = useState("");
   const [itemQuantity, setItemQuantity] = useState(1);
+  const [roomNumber, setRoomNumber] = useState(0);
   const [itemCategory, setItemCategory] = useState("");
   const [requestList, setRequestList] = useState([]);
   const [renderList, setRenderList] = useState(false);
@@ -81,6 +82,15 @@ export default function RequestItems() {
           <Typography variant="h4" sx={{ color: blue[500] }}>
             Request
           </Typography>
+          <TextField
+            id="roomNumber"
+            label="Room NO."
+            variant="outlined"
+            type="number"
+            onChange={(e) => setRoomNumber(e.target.value)}
+            fullWidth
+            required
+          />
           <TextField
             id="itemName"
             label="Item"
