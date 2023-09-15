@@ -1,6 +1,7 @@
 import * as React from 'react';
+import { useState, useEffect } from 'react';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
+// import LockOpenIcon from '@mui/icons-material/LockOpen';
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 import CastForEducationIcon from '@mui/icons-material/CastForEducation';
 import BoyIcon from '@mui/icons-material/Boy';
@@ -15,27 +16,27 @@ import Checkbox from '@mui/material/Checkbox';
 import { Link } from "react-router-dom"
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import axios from 'axios';
 // TODO remove, this demo shouldn't need to reset the theme.
 
 const defaultTheme = createTheme();
 
 export default function Login() {
-  const handleSubmit = (event) => {
+
+  const [role, setRole] = useState('');
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = async (event)=>{
     event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    const loginData = ({
-      email: data.get('email'),
-      password: data.get('password'),
-    //   role: data.get('role')
-    });
 
-    fetch('http://------------:8080/', {  
-
-      method: 'POST', 
-      mode: 'cors', 
-      body: JSON.stringify(loginData) 
-
-    })
+    const formData = new FormData()
+      formData.append('role', role);
+      formData.append('email', email);
+      formData.append('password', password);
+      axios.post("http://localhost:3000/login", formData)
+      .then(res=> console.log(res))
+      .catch((err=>console.log(err)));
   };
 
   return (
@@ -48,35 +49,44 @@ export default function Login() {
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',
+            borderRadius: '10px', 
+            padding: '20px', 
+            border: '2px solid #1976d2'
           }}
         >
-            <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+            {/* <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
                 <LockOpenIcon/>
             </Avatar>
             <Typography component="h1" variant="h5">
                 Sign in
-            </Typography>
+            </Typography> */}
             <Box sx={{m: 2, display: "flex", width: "100%" , justifyContent: "space-around"}}>
                 <Box>
-                    <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+                    <Button>
+                      <Avatar sx={{ m: 1, bgcolor: 'primary.main' }} onClick={()=>setRole("Admin")}>
                         < AdminPanelSettingsIcon />
-                    </Avatar>
+                      </Avatar>
+                    </Button>
                     <Typography align="center">
                             Admin
                     </Typography>
                 </Box>
                 <Box>
-                    <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+                    <Button>
+                      <Avatar sx={{ m: 1, bgcolor: 'primary.main' }} onClick={()=>setRole("Teacher")}>
                         <CastForEducationIcon />
-                    </Avatar>
+                      </Avatar>
+                    </Button>
                     <Typography align="center">
                         Teacher
                     </Typography>
                 </Box>
                 <Box>
-                    <Avatar sx={{ m: 1, bgcolor: 'primary.main' }}>
+                    <Button>
+                      <Avatar sx={{ m: 1, bgcolor: 'primary.main' }} onClick={()=>setRole("Staff")}>
                         <BoyIcon />
-                    </Avatar>
+                      </Avatar>
+                    </Button>
                     <Typography align="center">
                         Staff
                     </Typography>
@@ -84,7 +94,7 @@ export default function Login() {
                 
             </Box>
           
-          <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+          <Box component="form"onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
             <TextField sx={{display: "none"}}
               margin="normal"
               required
@@ -92,6 +102,7 @@ export default function Login() {
               name="role"
               type="text"
               id="role"
+              value={role}
               autoComplete="role"
             />
             <TextField
@@ -99,6 +110,7 @@ export default function Login() {
               required
               fullWidth
               id="email"
+              onChange={(e)=>{setEmail(e.currentTarget.value)}}
               label="Email Address"
               name="email"
               autoComplete="email"
@@ -109,6 +121,7 @@ export default function Login() {
               required
               fullWidth
               name="password"
+              onChange={(e)=>{setPassword(e.currentTarget.value)}}
               label="Password"
               type="password"
               id="password"
