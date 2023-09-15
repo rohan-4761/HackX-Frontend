@@ -18,7 +18,7 @@ import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import axios from 'axios';
 // TODO remove, this demo shouldn't need to reset the theme.
-
+const ip = 'http://13.232.218.95:8000';
 const defaultTheme = createTheme();
 
 export default function Login() {
@@ -30,11 +30,21 @@ export default function Login() {
   const handleSubmit = async (event)=>{
     event.preventDefault();
 
-    const formData = new FormData()
-      formData.append('role', role);
-      formData.append('email', email);
-      formData.append('password', password);
-      axios.post("http://localhost:3000/login", formData)
+    const formData = ({
+      // role: role,
+      email: email,
+      password: password
+    })
+    const config = ({
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    })
+    // const formData = new FormData()
+    //   formData.append('role', role);
+    //   formData.append('email', email);
+    //   formData.append('password', password);
+      await axios.post(`${ip}/auth/users`, JSON.stringify(formData), config)
       .then(res=> console.log(res))
       .catch((err=>console.log(err)));
   };

@@ -11,11 +11,15 @@ import Button from "@mui/material/Button";
 import LogoutIcon from "@mui/icons-material/Logout";
 import EditIcon from "@mui/icons-material/Edit";
 import { blue } from "@mui/material/colors";
+import {useLocation, useNavigate} from "react-router-dom"
 
 const Sidebar = ({ open, setOpen }) => {
+  const navigate = useNavigate();
+  const location = useLocation()
   const menuItems = [
     {
-      text: "Function 1",
+      text: "Dashboard",
+      path: "/dashboard"
     },
     {
       text: "Function 2",
@@ -54,8 +58,10 @@ const Sidebar = ({ open, setOpen }) => {
       <Divider />
       <List>
         {menuItems.map((item) => (
-          <ListItemButton key={item.text}>
-            <ListItemText primary={item.text} />
+          <ListItemButton key={item.text} onClick={()=> navigate(item.path)}>
+            <ListItemText primary={item.text} sx={{
+              color: location.pathname === item.path ? blue[700] : "text.primary"
+            }}/>
           </ListItemButton>
         ))}
         <Button
