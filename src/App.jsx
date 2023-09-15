@@ -6,12 +6,14 @@ import Login from "./components/Login";
 
 function App() {
   return (
-    <BrowserRouter>
-      <Appbar />
-      <Routes>
-        <Route path="/login" element={<Login/>} />
-      </Routes>
-    </BrowserRouter>
+    <>
+      <BrowserRouter>
+        <Appbar />
+        <Routes>
+          <Route path="/login" element={<Login />} />
+        </Routes>
+      </BrowserRouter>
+    </>
   );
 }
 
