@@ -7,8 +7,8 @@ import Login from "./components/login";
 function App() {
   const [count, setCount] = useState(0);
   return (
-    <Appbar />
     <BrowserRouter>
+      <Appbar />
       <Routes>
         <Route path="/login" element={<Login/>} />
       </Routes>
