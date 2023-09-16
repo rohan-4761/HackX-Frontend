@@ -6,6 +6,7 @@ import Login from "./components/Login";
 import Dashboard from "./dashboard/Dashboard";
 import RequestItems from "./components/RequestItems";
 import EditProfile from "./components/EditProfile";
+import Notifications from "./components/Notifications";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
           <Route path="/dashboard" element={<Dashboard />} />
           <Route path="/requestItems" element={<RequestItems />} />
           <Route path="/edit" element={<EditProfile />} />
+          <Route path="/notifications" element={<Notifications />} />
         </Routes>
       </BrowserRouter>
     </>

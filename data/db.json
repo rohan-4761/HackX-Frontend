@@ -1,0 +1,41 @@
+{
+    "notifications":[
+        {
+            "username":  "Yash Andahale",
+            "requestList":{
+                "0":{
+                "roomNumber" : 301 ,
+                "itemName" : "PC",
+                "itemQuantity" : 12,
+                "itemCategory" : "Hardware"},
+                "1":{
+                "roomNumber" : 301 ,
+                "itemName" : "Keyboard",
+                "itemQuantity" : 12,
+                "itemCategory" : "Hardware"},
+                "2":{
+                "roomNumber" : 301 ,
+                "itemName" : "Mouse",
+                "itemQuantity" : 12,
+                "itemCategory" : "Hardware"},
+                "4":{
+                "roomNumber" : 301 ,
+                "itemName" : "CPU",
+                "itemQuantity" : 12,
+                "itemCategory" : "Hardware"}
+            },
+            "id":1
+        },
+        {
+            "username":  "Dhruv Suvarna",
+            "requestList":{
+                "0":{
+                    "roomNumber" : 203 ,
+                    "itemName" : "Benches",
+                    "itemQuantity" : 5,
+                    "itemCategory" : "Furniture"}
+            },
+            "id":2
+        }
+    ]
+}

@@ -21,8 +21,16 @@ import Avatar from "@mui/material/Avatar";
 import IconButton from "@mui/material/IconButton";
 import DeleteIcon from "@mui/icons-material/Delete";
 import SendIcon from "@mui/icons-material/Send";
-import LabelImportantIcon from "@mui/icons-material/LabelImportant";
 import { blue } from "@mui/material/colors";
+
+const handleSubmit = (e) => {
+  e.preventDefault();
+  fetch("http://localhost:8000/notifications", {
+    method: "POST",
+    headers: { "Content-type": "application/json" },
+    body: JSON.stringify({ username, requestList }),
+  });
+};
 
 export default function RequestItems() {
   const [itemName, setItemName] = useState("");
@@ -31,17 +39,18 @@ export default function RequestItems() {
   const [itemCategory, setItemCategory] = useState("");
   const [requestList, setRequestList] = useState([]);
   const [renderList, setRenderList] = useState(false);
+  const username = "Rohan Das";
   const handleAddButton = () => {
     setRenderList(true);
     setRequestList([
       ...requestList,
       {
+        roomNumber: roomNumber,
         itemName: itemName,
         itemQuantity: itemQuantity,
         itemCategory: itemCategory,
       },
     ]);
-    console.log(requestList);
   };
   const deleteFromList = (rowIndex) => {
     const newList = [...requestList];
@@ -56,7 +65,7 @@ export default function RequestItems() {
   return (
     <>
       <Appbar />
-      <form autoComplete="off">
+      <form autoComplete="off" onSubmit={handleSubmit}>
         <Box
           sx={{
             position: "absolute",
